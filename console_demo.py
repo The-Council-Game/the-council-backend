@@ -32,9 +32,11 @@ def run_console():
         human_msg = session.history.get_last()
         print(format_message(human_msg))
 
-        bot_msg = session.generate_agent_reply()
-        print(format_message(bot_msg))
+        # Generate all agent replies
+        bot_messages = session.generate_agent_replies()
 
+        for bot_msg in bot_messages:
+            print(format_message(bot_msg))
 
 if __name__ == "__main__":
     run_console()
