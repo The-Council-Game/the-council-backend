@@ -28,14 +28,12 @@ def run_console():
         if not user_input:
             continue
         
-        # Add to session
         session.add_user_message(user_input)
+        human_msg = session.history.get_last()
+        print(format_message(human_msg))
 
-        # Get last message only
-        last_message = session.history.get_last()
-
-        # Print like chat
-        print(format_message(last_message))
+        bot_msg = session.generate_agent_reply()
+        print(format_message(bot_msg))
 
 
 if __name__ == "__main__":

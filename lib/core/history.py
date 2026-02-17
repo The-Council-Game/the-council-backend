@@ -1,26 +1,28 @@
 from typing import List
 from lib.core.message import Message
 
+from copy import deepcopy as clone
+
 class History:
     def __init__(self):
-        self._messages: List[Message] = []
+        self.__messages: List[Message] = []
 
     def add(self, message: Message) -> None:
-        self._messages.append(message)
+        self.__messages.append(message)
 
     def get_last_n(self, n: int) -> List[Message]:
-        return list(self._messages[-n:])
+        return list(self.__messages[-n:])
     
     def get_last(self) -> Message:
-        return self._messages[-1]
+        return clone(self.__messages[-1])
 
     def all(self) -> List[Message]:
-        return list(self._messages)
+        return list(self.__messages)
 
     @property
     def is_empty(self) -> bool:
-        return len(self._messages) == 0
+        return len(self.__messages) == 0
     
     @property
     def length(self) -> int:
-        return len(self._messages)
+        return len(self.__messages)
