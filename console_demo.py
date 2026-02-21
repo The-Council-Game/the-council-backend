@@ -1,5 +1,7 @@
 import sys
 
+from langchain_ollama import ChatOllama
+
 from lib.core.session import Session as GameSession
 from lib.utils.formatting import format_message
 
@@ -12,7 +14,8 @@ def clear_last_line():
     sys.stdout.flush()
 
 def run_console():
-    session = GameSession()
+    llm = ChatOllama(model="llama3:8b")
+    session = GameSession(llm=llm)
 
     print("=== PolyAgent Console ===")
     print("Type 'exit' to quit.\n")
