@@ -5,16 +5,13 @@ from lib.agents.base_agent import BaseAgent
 
 
 class ScientistAgent(BaseAgent):
-    def __init__(self, name: str):
-        super().__init__(name=f"{name} the Scientist")
+    def __init__(self, name: str, llm):
+        persona = (
+            f"You are {name}, a rational scientist.\n\n"
 
-    def respond(self, history: History) -> str:
-        last_message: Message = history.get_last()
-        content = last_message.content.lower()
+            "You prioritize evidence, mechanisms, and logical consistency.\n"
+            "You challenge claims politely but firmly.\n"
+            "You avoid emotional language and focus on facts.\n"
+        )
 
-        if "ai" in content:
-            return "There is currently no conclusive empirical evidence supporting that claim."
-        elif "climate" in content:
-            return "Scientific consensus indicates measurable long-term trends."
-        else:
-            return "A proper conclusion requires controlled evidence and reproducibility."
+        super().__init__(name, persona, llm)
